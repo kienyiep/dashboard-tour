@@ -1,0 +1,319 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+/*---------------------------------------------------------------------------------------------------------------
+ The first thing we going to do is to perform a basic reset. In the other css course, we have used something called normalize css in order to make a cross browser reset. So in order to make every browser render the page om the exac same way. Now doing so is still valid but I found that browsers are actually getting better and better and more consistent in a way that they render a website, so that is no longer really necessary, and so I don't do it anymore.  Let's just do a simple reset using the universal selector. 
+---------------------------------------------------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------------------------------------
+The universal selector will select each and every element on the page, and then apply these declarations here to it. So we want a margin on all of them of zero pexels, and also a padding of 0.
+So by default, the browser apply a certain margin or a certain padding to some elements. For e.g: an H1 element, so the main heading, there is always some margin in it, and we don't want any of that.
+---------------------------------------------------------------------------------------------------------------*/
+
+* {
+  margin: 0;
+  padding: 0;
+  /*---------------------------------------------------------------------------------------------------------   
+  what this does is to change the box model, so that the borders and the paddings are no longer added to the total width or the total height that we specify for a box. Without this any padding and border are added to the height or the width of an element.
+   ---------------------------------------------------------------------------------------------------------*/
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  /* The line height 1.7 means that it is 1.7 times bigger than the predefined height. */
+  line-height: 1.7;
+  color: #777;
+  padding: 30px;
+}
+
+.header {
+  /* --------------------------------------------------------------------------------------------------------- 
+  this will basically say that at every point, the height of the box, of this element should be 95% of the viewport height. We could put 100 here then the element would be exactly the same height as the viewport.
+   --------------------------------------------------------------------------------------------------------- */
+  height: 95vh;
+  /* ---------------------------------------------------------------------------------------------------------
+   we are currently in the css folder, so we first have to go one folder up to go into the project folder which is the the Natours folder, and then from there we went into the image folder, and then hero.jpg. And so we will write ../ then image and then the name of the image  
+   ---------------------------------------------------------------------------------------------------------*/
+
+  /* ---------------------------------------------------------------------------------------------------------
+   here we have basically two background images, on on top of the other. The first one is the linear gradient going from this color #7ed56f to this color #28b485. And then after that, so basically below that is this hero image.  The another parameter that we can specify in the linear gradient is basically to where the gradient should go, we can say to right. So now the css understand that it should start on the left side and go to the right. 
+   --------------------------------------------------------------------------------------------------------- */
+
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(126, 213, 111, 0.8),
+      hsla(160, 64%, 43%, 0.8)
+    ),
+    url(../img/hero.jpg);
+
+  /* --------------------------------------------------------------------------------------------------------- 
+  what cover does is that whatever the width of the viewport, or the element. It will always try to fit the element inside of the box.  
+  ---------------------------------------------------------------------------------------------------------*/
+  background-size: cover;
+  /* --------------------------------------------------------------------------------------------------------- 
+  what it does is to ensure that whatever the viewport size is that this top of the image here always stay at the top of the container. The bottom of  the image will always get cropped but the top of the image stays the same.
+  ---------------------------------------------------------------------------------------------------------*/
+
+  /* --------------------------------------------------------------------------------------------------------- 
+  when we use the chrome DevTools, in the dev tool, if we set the background-position to bottom. What happen is the bottom will stay the same as we change the image size, and the top of the image will always get cropped. We can also set it to center, what it will do now is to always stay at the center, and it will now probable cropped out the top and the bottom.
+  ---------------------------------------------------------------------------------------------------------*/
+  background-position: top;
+  /* --------------------------------------------------------------------------------------------------------- 
+   here we will specify a polygon in which the image, or the element, will still be visible. In the polygon, we define a bunch of coordinates, which define this polygon. We will put the placeholders like X and epsilon.
+   So now we will specify the 4 coordinate of this polygon, where we want the element to still be visible in order to obtain the polygon that we need.  
+    ---------------------------------------------------------------------------------------------------------*/
+  /* --------------------------------------------------------------------------------------------------------- 
+  here we will not specify a percentage, but a unit of viewport height, as we have set the height of this element to 95 vh. So now if we change the viewport height, it will also change dynamically.
+  ---------------------------------------------------------------------------------------------------------*/
+
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  /* here we will make a triangle */
+
+  /* clip-path: polygon(50% 0, 100% 100%, 0 100%); */
+
+  /* --------------------------------------------------------------------------------------------------------- 
+  there is actually a very cool tool, which is called clippy, which will provide you all kind of the clip path shape, and once you select any one of them, it will provide you the clip path property, and then you just have to copy the css code and paste it here.
+  ---------------------------------------------------------------------------------------------------------*/
+  position: relative;
+}
+
+.logo-box {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.logo {
+  height: 35px;
+}
+
+.logo:hover {
+  animation: moveInRight 5s ease-out;
+}
+
+.text-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* background-color: red; */
+  /* here we will specify how much we want to translate on x and on epsilon. And what we want is -50% for both.
+  This is because these 50% are now no longer in relation to the parent element, but of the element itself. So if we say we want -50%, it will be shifted half of the width to the left side, and the same for the height. So minus 50% says that it will be shifted 50% of the element's height to the top. */
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 60px;
+  backface-visibility: hidden;
+}
+/* In order to put these two part of the text, one under another. The best way is to display them both as block elemnt. This is because block element  occupy the entire width that they have available, and they create line breaks after and before them. So a span element is by default an inline element, so it is just like text. */
+.heading-primary-main {
+  display: block;
+  font-size: 60px;
+  font-weight: 400;
+  letter-spacing: 35px;
+  /* for an animation to work, there are only 2 properties, that we have to really specify, which are called animation-name, which is the name of the animation we just write, and so it is moveInLeft.  And then the second property is animation duration.  */
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+
+  /* Before the animation start to play, it will first wait 3 seconds */
+  /* animation-delay: 3s; */
+  /* the animation will happen 3 times, if we set it to 3. */
+  /* animation-iteration-count: 3; */
+  /* --------------------------------------------------------------------------------------------------------- 
+  this is a function which define how the animation will proceed, so how fast and how slow these parameters that we specify in the moveInleft happen over time. There are different built-in animation functions, for e.g ease out, ease in, ease in out, linear, step-start, step-end.
+
+  Can also check our more about the animation iteration count in the MDN doc. 
+  There is also a cubic-bezier function here which basically allow us to write a custom function. 
+  So a custom timing function different from the predefined function(ease in, ease out...).
+  ---------------------------------------------------------------------------------------------------------*/
+  animation-timing-function: ease-out;
+}
+.heading-primary-sub {
+  display: block;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 15px;
+  /* instead of specifying all of the properties one by one. We can simply use the shortened property, which is animation*/
+  animation: moveInRight 1s ease-out;
+}
+
+/* --------------------------------------------------------------------------------------------------------- 
+    you probably notice that in the end, the text right before the animtation end, you will probable see a little shake here, it move a little bit like to the top. Sometime this happens in animations, and no one really knows actually why this happen. 
+
+    To fix this, we can simply declare the backface-visibility property, and set it to hidden. So the entire heading primary element because you see that actually this entire element is what moves on this animation.
+
+    This backface visibility property determines if the back part of the element when we transform it is visible or hidden for the user. So imagine we have an element and we rotate it 180 degrees. So it would be logical that we then see the back part of the element. But if we use backface-visibility hidden, then that back part so that part that is behind the element actually get hidden.
+  ---------------------------------------------------------------------------------------------------------*/
+
+@keyframes moveInLeft {
+  /* --------------------------------------------------------------------------------------------------------- 
+     in here we can specify what we want to happen in each moment of time of the animation.
+     so we start with 0% which is before the animation actually start. 0% is also called initial state, and then 100% which is the final state.
+  ---------------------------------------------------------------------------------------------------------*/
+
+  /* --------------------------------------------------------------------------------------------------------- 
+  Now for the browser performance, it is best to ever animate two different properties. One is opacity and the other one is the transform property. That is what the browsers are optimized for these two properties.
+  ---------------------------------------------------------------------------------------------------------*/
+
+  0% {
+    /* --------------------------------------------------------------------------------------------------------- 
+      Initial State
+  ---------------------------------------------------------------------------------------------------------*/
+    /* --------------------------------------------------------------------------------------------------------- 
+     before it start to move in, we want the element to be invisible. 
+  ---------------------------------------------------------------------------------------------------------*/
+    /* --------------------------------------------------------------------------------------------------------- 
+     Remember that the element comes in from the left.  So we want the element to be more on the left in the beginning before the animation actually start.
+  ---------------------------------------------------------------------------------------------------------*/
+
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  /* 60% {
+    transform: rotate(180deg);
+  } */
+  /*  we want something to happen at the moment where the animation is at 80%.  */
+  80% {
+    /* --------------------------------------------------------------------------------------------------------- 
+      Intermediate State
+      here the element will be moved a little  bit to the right before it goes back to it's original position at zero.
+  ---------------------------------------------------------------------------------------------------------*/
+    transform: translate(10px);
+  }
+  100% {
+    /* --------------------------------------------------------------------------------------------------------- 
+      Final State
+  ---------------------------------------------------------------------------------------------------------*/
+    /* at the end of course, we want it to be back to 1.*/
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+
+/* --------------------------------------------------------------------------------------------------------- 
+    From here, the initial position is alot more to the left, and then this intermediate position is about more to the right
+  ---------------------------------------------------------------------------------------------------------*/
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translate(100px);
+  }
+
+  80% {
+    transform: translate(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0px);
+  }
+}
+@keyframes moveInBottom {
+  /* as the epsilion direction is from top to bottom. So if we want to move down it is a positive value,  */
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------------------------------------- 
+so this is a link pseudo class. Pseudo class is a special state of selector. So this link here is a state of the button selector. We use pseudo class to style element under special condition. So link is a special state of a selector when it is an anchor element, so it functions as a link.
+
+There is also a visited state, it is a state when the user has already clicked on the button once before, and then see the button again. For e.g, if we dont style a link at all, it will appear blue at the beginning. And then once we click on it once, when we see it again, then it will be purple. So that is the default styling of links in most of the browsers.
+  ---------------------------------------------------------------------------------------------------------*/
+
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  /* this is not going to work as expected, because it is occupying the space of the heading primary sub where it should not. That is because, this button element right now is an inline element, because it is simply text, and we should display it as an inline block. And this way the box model works on this element as if it was just a normal block element. So we should always do this if we want to give some padding or some height or width to element. */
+  display: inline-block;
+  /* since this is an inline block element, so it is treated as it it was the text. And so it is text and we want it to be at the center of a box. All we have to do is to set the text box, and set its text align property to the center, and so now it is going to center the text that is inside of the box, and of course including the button. */
+  border-radius: 100px;
+  /* here we will specify which properties  that we want to animate, if we are not sure which properties or we dont want to write them out, we can just write all. in this case all the properties are enabled to be animated. This is the shorthand version of the transition property, just like before where we have a shorthand for animation.*/
+  transition: all 0.2s;
+  position: relative;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  /* the first one is the offset in the x direction. Since we dont want any shadow in the x direction, we only want it in the epsilon direction. The second one is the offset in epsilon. The third value is blur. */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+/* when we click on the element it is an active state */
+.btn:active {
+  /* this one pixel up , so this minus 1 pixel is in relation to the initial state, so to the link state, not to the hover. So it is not minus 1 pixel in relation to the hover state, but it is always related to the initial link state. */
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+  background-color: #fff;
+  color: #777;
+}
+
+.btn::after {
+  /*The after pseudo element that we are gonna use adds like a vritual element right after the element that we are selecting. And we can then style that element. And so using this after pseudo element can be really powerful to do some cool effects. 
+  
+   so the trick here is to add an element that looks exactly like the button that we already have, but we put it behind the button. And when we hover out of the button, then this hidden pseudo element  amazingly goes back behind the button. */
+
+  /* first in order for an after pseudo element to actually appear on the page, we need to specify its content property. It does not matter what is the content, it can even be empty, but we have to specify it otherwise it is not going to appear. Which is same goes to the display property. In this case, we are going to use inline block, because the button that we have is also an inline block. So again, we want it to be exactly the same.*/
+  content: "";
+  display: inline-block;
+  /* since the after pseudo element is basically treated like a child of the button. And so we say we want the height to be 100%, that is the 100% of height of the button. */
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  /* to put it behind our actual button. We will use absolute positioning, and 0 from the top and 0 from the left. And then this absolute positioning needs to have a reference. And the reference is the first element with the relative position that it can find, now in this case, it would be the header, but we dont want it to be the header. We want it to be hidden after the button. So the reference should be the button. So what we have to do is to set the position property of the button to relative, so now it should hidden behind the button*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* remember that the z index defines the position of the elements if they are one on top of another.
+     Since this one has -1, and so it is definitely behind the button. */
+  z-index: -1;
+  transition: 0.4s;
+}
+/*  we also want it to be white, and in order for it to be white, we actually should make another after pseudo element, but this time for the button.
+ */
+.btn-white::after {
+  background-color: rgb(255, 255, 255);
+  /* if we put red, everything will be red, but we still can be sure the pseudo element is behind the button because we still can see the text. And so that means the original button is still on top of the pseudo element. */
+
+  /* background-color: red; */
+}
+
+/* we want to see the animation when we hover the button. */
+/* when we hover the button, then we want certain style for the after pseudo element. So this is an after pseudo element only when we have the button on the hover state, and we want it to be bigger. We want the element to grow and fade out. So what we first do is to use once again, the transform property.*/
+.btn:hover::after {
+  /* we will use scale to increase the element. So if we do scale 2. Then it will appear double the size that it had before. */
+  /* now we can actually make this a little bit better because if you look closely at the top of the button. And you see it looks really small. So the part that is fading out is like really small. So we can do it better by using different scale. */
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.btn-animated {
+  animation: moveInBottom 0.5s ease-out 0.75s;
+  /* animation-name: moveInBottom;
+  animation-duration: 1s;
+  animation-timing-function: ease-out; 
+  animation-delay: 0.75s*/
+
+  /* As the button will stay visible before it start. In order to prevent this, we could simply put these initial state on the button, but that would be highly impractical. So there is another property related to animations, and this one is called animation fill mode. And now we can set it to backward, then it will automatically apply the styles up to 0 percent before the animation starts. */
+  animation-fill-mode: backwards;
+}

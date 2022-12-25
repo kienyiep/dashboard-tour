@@ -1,0 +1,69 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: inherit;
+}
+// 1 rem - 10px, since the 10px is the root font size, if we put 16 then 16px is the root font size then 1 = 16px
+// the default font size given by the browser is 16px, and the px can be changed higher by the user.
+// 100% -16px
+// 62.5 - 10px
+
+// if the user change the default font size to higher the 10px will be dynamically changed as well.
+html {
+  // This defines what 1 rem is
+  //1 rem = 10px, 10/16 = 62.5%
+  font-size: 62.5%; // this is also typegraphy, but this act as a global defination of what 1 rem is.
+  // @media (max-width: 600px) {
+  //   font-size: 50%;
+  // }
+
+  // @include respond-phone {
+  //   font-size: 50%; // parse the content into mixin
+  // }
+
+  // @include respond(phone) {
+  //   font-size: 50%; //
+  // } // dont need this, since it also need 50% same as below tab-port
+
+  @include respond(tab-land) {
+    //width<1200
+    font-size: 56.25%; // 1rem =9px, 9/16=56.25%
+  }
+
+  @include respond(tab-port) {
+    //width<900
+    font-size: 50%; // 1rem = 8px, 8/16=50%
+  }
+
+  // the larger one before smalle one so that it wont cause conflict
+  // since both of the media queries apply, it will simply be the last declaration be applied.
+
+  @include respond(big-desktop) {
+    // width<1800
+    font-size: 75%; // 1rem = 12px, 12/16=75%
+  }
+  // @include respond(phone) {
+  //   //width<600
+  //   font-size: 30%; // 1rem = 8px, 8/16=50%
+  // }
+}
+
+body {
+  box-sizing: border-box;
+  padding: 3rem;
+
+  @include respond(tab-port) {
+    padding: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  html {
+  }
+
+  body {
+  }
+}
